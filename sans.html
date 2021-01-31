@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>sans</title> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
+    body{
+        background-color: black;
+    }
+    .sans{
+        display: block;
+        margin: auto;
+    }
+    .heart{
+        color: white;
+        font-size: 50px;
+    }
+    .feed, .kill, .suicide, .random{
+        display: block;
+        margin: auto;
+        margin-top: 7px;
+        width: 170px;
+        height: 37px;
+        border-radius: 10px;
+        background-color: aqua;
+        font-family: 'Gugi', cursive;
+        font-size: large;
+    }
+   
+</style> 
+  <script>
+    
+    $(function(){
+        $heart = 1;
+        $(".feed").on("click", function(){
+            $heart += 1;
+            $(".heart").empty();
+            $(".heart").append("heart : "+$heart+"  ("+"+"+1+")");
+        });
+
+        $(".kill").on("click", function(){
+            $heart -= 1;
+            $(".heart").empty();
+            $(".heart").append("heart : "+$heart+"  ("+-1+")");
+        if($heart < 1){
+            $(".sans").attr("src","https://ifh.cc/g/Hxr7Qt.gif");
+            setTimeout(function(){
+                alert("뒤지셨습니다.");
+                },100);
+            setTimeout(function(){
+                location.reload();
+                },100);
+        }
+        });
+
+        $(".suicide").on("click", function(){
+            $(".sans").attr("src","https://ifh.cc/g/Hxr7Qt.gif");
+            $heart = 0;
+            $(".heart").empty();
+            $(".heart").append("heart : "+$heart+"  ("+"-all"+")");
+            setTimeout(function(){
+                alert("뒤지셨습니다.");
+                },100);
+            setTimeout(function(){
+                location.reload();
+                },100);
+        });
+
+        $(".random").on("click", function(){
+            $rand = Math.floor(Math.random()*100);
+            $mrand = -Math.floor(Math.random()*100);
+            $result = [$rand, $mrand][Math.floor(Math.random()*2)];
+            $heart += $result;
+            if($result >= 0){
+                $result = "+"+$result;
+            }
+            $(".heart").empty();
+            $(".heart").append("heart : "+$heart+"  ("+$result+")");
+            if($heart < 1){
+            $(".sans").attr("src","https://ifh.cc/g/Hxr7Qt.gif");
+            setTimeout(function(){
+                alert("뒤지셨습니다.");
+                },100);
+            setTimeout(function(){
+                location.reload();
+                },100);
+        }
+        });
+        
+        
+    });
+</script>
+ </head>  
+ <body> 
+  <h1 class="heart">heart : 1</h1> 
+  <img class="sans" src="https://ifh.cc/g/6fgKBK.gif"> 
+  <button class="feed">먹이주기</button>
+  <button class="kill">칼빵</button> 
+  <button class="suicide">자살</button> 
+  <button class="random">랜덤버튼</button>  
+ </body>
+</html>
